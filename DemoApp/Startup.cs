@@ -1,4 +1,6 @@
 using DemoApp.Data;
+using DemoApp.Repositories;
+using DemoApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +29,9 @@ namespace DemoApp
         {
             services.AddDbContext<CustomerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
